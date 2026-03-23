@@ -1,0 +1,8 @@
+{
+  "name": "n8n-workspace",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "n8n:check": "node --env-file=.env scripts/n8n-check.mjs"
+  }
+}
