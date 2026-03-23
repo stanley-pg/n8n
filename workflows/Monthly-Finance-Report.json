@@ -1,0 +1,147 @@
+{
+  "exportMeta": {
+    "exportedAt": "2026-03-23T22:28:11.050Z",
+    "workflowId": "SgnMVTml4zI3DGDf",
+    "workflowName": "Monthly Finance Report",
+    "sourceBaseUrl": "https://goguru.app.n8n.cloud",
+    "formatVersion": 1
+  },
+  "workflow": {
+    "updatedAt": "2026-03-23T22:27:43.442Z",
+    "createdAt": "2026-03-02T22:31:31.323Z",
+    "id": "SgnMVTml4zI3DGDf",
+    "name": "Monthly Finance Report",
+    "description": null,
+    "active": false,
+    "isArchived": false,
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "months",
+                "triggerAtDayOfMonth": 2
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          0,
+          0
+        ],
+        "id": "cf7b4e2a-dacb-4559-aa0e-a63a15591f27",
+        "name": "Schedule Trigger"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "8a65e451-adc5-44b7-b381-239062a49a3a",
+                "name": "lastRun",
+                "value": "={{ $now.minus({ days: 1 }).toISO() }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          224,
+          0
+        ],
+        "id": "23ffc6a3-9ca9-452e-9587-37a59557ec1e",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "resource": "fileFolder",
+          "searchMethod": "query",
+          "queryString": "=name contains 'Statement' and modifiedTime > '{{ $json.lastRun }}' and trashed = false",
+          "returnAll": true,
+          "filter": {},
+          "options": {}
+        },
+        "id": "a73977c8-7221-452d-bf18-d9b6e759dcdc",
+        "name": "Search Google Drive",
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          448,
+          0
+        ],
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "g3mDjfoYh1uXOF4J",
+            "name": "Google Drive account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Search Google Drive",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "binaryMode": "separate",
+      "availableInMCP": false,
+      "callerPolicy": "workflowsFromSameOwner"
+    },
+    "staticData": null,
+    "meta": {
+      "templateCredsSetupCompleted": true
+    },
+    "pinData": {},
+    "versionId": "ebe1f5d7-d9dc-439b-9723-88237b93aae9",
+    "activeVersionId": null,
+    "versionCounter": 58,
+    "triggerCount": 0,
+    "shared": [
+      {
+        "updatedAt": "2026-03-02T22:31:31.326Z",
+        "createdAt": "2026-03-02T22:31:31.326Z",
+        "role": "workflow:owner",
+        "workflowId": "SgnMVTml4zI3DGDf",
+        "projectId": "bLSFwcmbtecdWzra",
+        "project": {
+          "updatedAt": "2026-03-02T20:55:33.775Z",
+          "createdAt": "2026-03-02T20:55:27.995Z",
+          "id": "bLSFwcmbtecdWzra",
+          "name": "Stanley P <stanley@goguru.agency>",
+          "type": "personal",
+          "icon": null,
+          "description": null,
+          "creatorId": "4134771b-0e91-4a20-828e-69b159ba2fa9"
+        }
+      }
+    ],
+    "tags": [],
+    "activeVersion": null
+  }
+}

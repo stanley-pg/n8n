@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "n8n:check": "node --env-file=.env scripts/n8n-check.mjs"
+    "n8n:check": "node --env-file=.env scripts/n8n-check.mjs",
+    "n8n:export": "node --env-file=.env scripts/n8n-export.mjs",
+    "n8n:push": "node --env-file=.env scripts/n8n-import.mjs"
   }
 }

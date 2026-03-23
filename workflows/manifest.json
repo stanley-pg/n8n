@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "workflows": [
+    {
+      "id": "SgnMVTml4zI3DGDf",
+      "file": "workflows/Monthly-Finance-Report.json"
+    }
+  ]
+}
